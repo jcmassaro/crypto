@@ -6,7 +6,7 @@ import csv
 from datetime import datetime
 import os
 
-os.chdir('/Users/elb5465/Desktop/cryptoMarket_analysis/crypto')
+os.chdir('/Users/JohnMassaro/Desktop')
 
 
 #Functions below return data from Kraken BTC exchange. Data is packed into dictionaries inside lists inside dictionaries, etc. Functions unpack nested items and convert desired string into float object 
