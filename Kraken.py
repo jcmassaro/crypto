@@ -134,9 +134,30 @@ def write_to_csv():
                    
 
 
-write_to_csv()
+#write_to_csv()
  
-  
+ask_price_list = []
+while True:
+    request = requests.get('https://api.kraken.com/0/public/Ticker?pair=XBTUSD')
+    data_list = parse_data(request)
+    
+    
+    ask_price_list.append(int(ask_price(data_list)))
+    print(ask_price_list)
+
+    for i in range(1):
+        if ask_price_list[i-1] < ask_price_list[i]:
+            print('Dip')
+        elif ask_price_list[i-1] > ask_price_list[i]:
+            print('Bump')
+        else:
+            print('No change')
+        
+
+    
+            
+
+    time.sleep(3)  
 
 
     
