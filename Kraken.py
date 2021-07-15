@@ -134,28 +134,50 @@ def write_to_csv():
                    
 
 
-#write_to_csv()
- 
-ask_price_list = []
+#write_to_csv()    
+def print_askPriceInfo(ask_price_info_dict):
+      print("last: ", ask_price_info_dict["last"],
+            "\nhigh: ", ask_price_info_dict["high"], 
+            "\nlow: ",  ask_price_info_dict["low"])      
+      print()
+
+        
+
+        
+isAskPriceSet = False
+ask_price_info_dict = {"low":-1, "high":-1, "last":-1}
+
 while True:
     request = requests.get('https://api.kraken.com/0/public/Ticker?pair=XBTUSD')
     data_list = parse_data(request)
-    
-    
-    ask_price_list.append(int(ask_price(data_list)))
-    print(ask_price_list)
+    curr_askPrice = int(ask_price(data_list))
 
-    for i in range(1):
-        if ask_price_list[i-1] < ask_price_list[i]:
-            print('Dip')
-        elif ask_price_list[i-1] > ask_price_list[i]:
-            print('Bump')
-        else:
-            print('No change')
-        
+    #set initial ask price details 
+    if (not isAskPriceSet):
+      ask_price_info_dict["low"]     = curr_askPrice
+      ask_price_info_dict["high"]    = curr_askPrice
+      ask_price_info_dict["last"]    = curr_askPrice
+      isAskPriceSet = True
+      print_askPriceInfo(ask_price_info_dict)
 
-    
-            
+
+    #save data from subsequent requests
+    if (curr_askPrice < ask_price_info_dict["low"]):
+      ask_price_info_dict["low"]  = curr_askPrice
+    if (curr_askPrice > ask_price_info_dict["high"]):
+      ask_price_info_dict["high"] = curr_askPrice
+
+
+    #keep track of dips/bumps
+    if (ask_price_info_dict["last"] < curr_askPrice):
+      print("\n[--------------- bump ---------------]")
+    if (ask_price_info_dict["last"] > curr_askPrice):
+      print("\n[--------------- dip ---------------]")
+    if (ask_price_info_dict["last"] == curr_askPrice):
+      print("...")
+    else:
+      ask_price_info_dict["last"] = curr_askPrice
+      print_askPriceInfo(ask_price_info_dict)             
 
     time.sleep(3)  
 
