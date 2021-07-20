@@ -182,4 +182,13 @@ while True:
     time.sleep(3)  
 
 
-    
+#TODO: Add piece to look at % dip from ATH 
+    if isAskPriceSet == True:
+      all_time_high_price = ask_price_info_dict["high"]
+      print('ATH:', all_time_high_price)
+      dip_calc = ((all_time_high_price - curr_askPrice)/curr_askPrice)*100
+      if dip_calc >= .001:
+        print('Dip of ' + str(dip_calc) +'%')
+
+   
+
