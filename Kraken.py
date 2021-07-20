@@ -190,5 +190,5 @@ while True:
       if dip_calc >= .001:
         print('Dip of ' + str(dip_calc) +'%')
 
-   
+#TODO: Email notfication system    
 
