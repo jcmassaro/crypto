@@ -182,7 +182,7 @@ while True:
     time.sleep(3)  
 
 
-#TODO: Add piece to look at % dip from ATH 
+#piece to look at % dip from ATH 
     if isAskPriceSet == True:
       all_time_high_price = ask_price_info_dict["high"]
       print('ATH:', all_time_high_price)
