@@ -197,6 +197,6 @@ while True:
       dip_calc = ((all_time_high_price - curr_askPrice)/curr_askPrice)*100
       if dip_calc >= .001:
         print('Dip of ' + str(dip_calc) +'%')
-        message = client.messages.create(to='+14129260669', from_='+12292806568', body = 'Bitcoin is at a ' + str(dip_calc) + '%' + ' dip.')
-
+        message = client.messages.create(to='XXXXXX', from_='XXXXX', body = 'Bitcoin is at a ' + str(dip_calc) + '%' + ' dip.')
+        time.sleep(600)
 
