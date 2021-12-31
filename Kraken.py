@@ -5,8 +5,16 @@ from time import sleep
 import csv
 from datetime import datetime
 import os
+from twilio.rest import Client
 
 os.chdir('/Users/JohnMassaro/Desktop')
+
+#Loading in Twilio data to send SMS alert
+account = 'XXXXXXX'
+token = 'XXXXXX'
+client = Client(account, token, region = 'us1', edge = 'ashburn')
+
+
 
 
 #Functions below return data from Kraken BTC exchange. Data is packed into dictionaries inside lists inside dictionaries, etc. Functions unpack nested items and convert desired string into float object 
@@ -189,6 +197,6 @@ while True:
       dip_calc = ((all_time_high_price - curr_askPrice)/curr_askPrice)*100
       if dip_calc >= .001:
         print('Dip of ' + str(dip_calc) +'%')
+        message = client.messages.create(to='+14129260669', from_='+12292806568', body = 'Bitcoin is at a ' + str(dip_calc) + '%' + ' dip.')
 
-#TODO: Email notfication system    
 
